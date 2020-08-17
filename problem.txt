@@ -1,0 +1,30 @@
+#include <bits/stdc++.h>
+  using namespace std;
+
+int maximazi_problem(int n,int k )
+{ int diff=240-k;
+ int i=0,temp=0;
+ if (temp==diff)
+ return 0;
+ 
+ 
+ while(diff>temp && diff>0)
+ {
+     int  temp=5*i;
+     diff=diff-temp;
+     i++;
+ }
+ 
+ i-=2;
+ return i;
+}
+  
+  int main()
+  {
+      int n,k;
+      cin>>n>>k;
+      cout<<maximazi_problem(n,k);
+      cout<<endl;
+    
+    return 0;
+  }

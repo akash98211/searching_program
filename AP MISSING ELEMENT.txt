@@ -1,0 +1,42 @@
+#include <bits/stdc++.h>
+using namespace std;
+int findmissing(int arr[],int start, int end,int diff)     // used here binary serch function
+{
+  if(start>end)  return -1;
+  
+  int mid=start+ (end-start)/2;
+  
+  if (arr[mid + 1] - arr[mid] != diff) 
+        return (arr[mid] + diff);                      // 1 4 [7] 13 16     just  right side mising 
+        
+  if(mid>0 && arr[mid]-arr[mid-1]!=diff)
+  return (arr[mid-1]+diff);                           //  1 4 [10] 13 16      just lef side missing
+   
+   if (arr[mid] == arr[0] + mid * diff)                       // missing element present on right side  after few number
+   return findmissing(arr, mid + 1, end, diff);
+   
+    return findmissing(arr,start,mid-1,diff);                // missing element present on left side  after few number
+        
+}
+int findAPmissing(int arr[],int n)
+{
+  int diff=(arr[n-1]-arr[0])/n;                             // it provide differenceof AP
+  
+  return findmissing(arr,0,n-1,diff);
+}
+
+int main()
+{
+  int t;cin>>t;
+while(t!=0){
+int n;cin>>n;
+int arr[n];
+for (int i = 0; i < n; i++) {
+  cin>>arr[i];
+}
+cout<<findAPmissing(arr,n)<<endl;
+
+t--;
+}
+ return 0;
+}

@@ -1,0 +1,43 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int foundpair(int a[],int n,int k)
+{
+  sort(a,a+n);
+  
+int i =0,j=1;
+int count=0;
+ 
+while(i<n && j<n)
+{  
+  if(a[i]==a[j]  && i!=j)
+  j++;
+  
+  if(a[j]-a[i]==k && i!=j)
+    { count++; i++; }             // when it is equall count increses
+   
+  if(a[j]-a[i]<k)        // when less than k, j varible increse that is coursrormove right
+  j++;
+   
+  else
+  i++;                  // when more than k  i varible move right also
+}
+ 
+return count;          // finally it return our pair
+}
+
+int main()
+{
+  int n,k;
+  cin>>n>>k;
+  int a[n];
+  for (int i = 0; i < n; i++) {
+    cin>>a[i];
+  }
+  // sort(a,a+n);
+  // for (int i = 0; i < n; i++) {
+  //   /* code */cout<<a[i]<<" ";
+  // }
+  cout<<foundpair(a,n,k)<<endl;
+ return 0;
+}

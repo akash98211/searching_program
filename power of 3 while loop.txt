@@ -1,0 +1,46 @@
+#include <bits/stdc++.h>
+using namespace std;
+long long power(int a,int b)
+{
+  long long x=a, i=1;
+  while(i<b)
+  {
+    x=x*a;
+    i++;
+  }
+      return x;
+}
+int main()
+{int t;
+cin>>t;
+  while(t!=0)
+  {int n,i,a;
+  long long sum=0;
+  cin>>n;
+   i=0;                       //i=0
+   while(sum>=n)              
+    {
+    sum=sum+power(3,i);
+    i++;
+    }
+    cout<<sum<<endl;
+  i=0;
+   while(sum<n)
+  {
+    sum=sum-power(3,i);
+    i++;
+  }
+  cout<<sum<<endl;
+  a=sum;
+  i=0;
+  while(sum>=n)
+  {
+    sum=sum+power(3,i);
+    i++;
+    sum=a;
+  }
+  cout<<sum<<endl;
+    t--;
+  }
+   return 0;
+}

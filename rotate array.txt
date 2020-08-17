@@ -1,0 +1,76 @@
+
+ #include <bits/stdc++.h>
+using namespace std;
+
+int findpivot(int a[],int start ,int end)
+{
+  if(start>end)
+  return -1;
+  
+  int mid=start+(end-start)/2;
+  
+  if(mid<end && a[mid]>a[mid+1])       // 50  60 70 80 [90] 10 20 30
+  return mid+1;
+  
+  if(mid>start && a[mid]<a[mid-1])     // 50  60 70 80 90 [10] 20 30
+  return mid;
+  
+  if(a[mid]<a[start])
+   return findpivot(a,start,mid-1);     // 50  60 70 80 90 10 [20] 30
+    
+  return findpivot(a,mid+1,end);          // 50  60 [70] 80 90 10 20 30
+   
+}
+
+int binary_search(int a[],int low,int high,int x)
+{
+  if(low>high)
+  return -1;
+  
+  int mid=low+(high-low)/2;
+  
+  if(a[mid]==x)
+  return mid;
+  
+  if(x>a[mid])
+  return binary_search(a,mid+1,high,x);
+  
+  else
+  return binary_search(a,low,mid-1,x);
+}
+
+int findkey(int a[],int n, int key)
+{
+  int pivot=findpivot(a,0,n-1);
+  
+  if(pivot==-1)
+  return binary_search(a,0,n-1,key);       // array already are sorted
+  
+  if(a[pivot]==key)
+  return pivot;                  // our piviot is our finding element
+  
+  if(a[0]<key)
+  return binary_search(a,0,pivot-1,key);    // key conatin on left side   {key =55]    50  60 70 80 90 10 20 30
+  
+  return binary_search(a,pivot+1,n-1,key);   // key conatin on right side   {key =20]    50  60 70 80 90 10 20 30
+}
+
+int main()
+{
+  int t;cin>>t;
+while(t!=0){
+   int n;cin>>n;
+   int arr[n];
+   for (int i = 0; i < n; i++) {
+     cin>>arr[i];
+     /* code */
+   }
+   int x;cin>>x;
+   
+cout<<findkey(arr,n,x)<<endl;
+
+t--;
+}
+ return 0;
+}
+
